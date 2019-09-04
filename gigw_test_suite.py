@@ -11,9 +11,8 @@ import webscrap_spell
 
 def execute():
     script_name = os.path.basename(__file__)
-    print(script_name + " : " + "Launching GIGW Test Suite in Selenium Gecko Browser headlessly")
+    print(script_name + " : " + "Launching GIGW Test Suite")
 
-    # creating thread
     thread_spell = threading.Thread(target=webscrap_spell.execute)
     thread_html = threading.Thread(target=webscrap_html.execute)
     thread_css = threading.Thread(target=webscrap_css.execute)
