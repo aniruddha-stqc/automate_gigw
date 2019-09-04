@@ -1,62 +1,75 @@
-from selenium import webdriver
-from bs4 import BeautifulSoup
-from selenium.webdriver.firefox.options import Options
-import globals
-import time
-import xlsxwriter
 import datetime
-import os, sys
+import os
+import sys
+import time
 
-script_name = os.path.basename(sys.argv[0])
-print(script_name + " : " + "Launching Color Contrast Accessibility Validator in Selenium Gecko Browser headlessly")
-options = Options()
-options.headless = True
-driver = webdriver.Firefox(options=options, executable_path=globals.gecko_path)
-driver.get("https://color.a11y.com/Contrast/")
+import xlsxwriter
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 
-driver.find_element_by_id("urltotest").clear()
-driver.find_element_by_id("urltotest").send_keys(globals.target_website)
-driver.find_element_by_id("submitbuttontext").click()
+import globals
 
-print(script_name + " : " + "Scanning target website "+ globals.target_website + " for Color Contrast issues")
 
-time.sleep(globals.time_wait)
-page_source = driver.page_source
-#Close the webdriver
-driver.close()
-#Selenium hands over the page source to Beautiful Soup for WebScraping
+def execute():
+    script_name = os.path.basename(__file__)
+    print(script_name + " : " + "Launching Color Contrast Accessibility Validator in Selenium Gecko Browser headlessly")
+    options = Options()
+    options.headless = True
+    driver = webdriver.Firefox(options=options, executable_path=globals.gecko_path, service_log_path=os.devnull)
+    driver.get("https://color.a11y.com/Contrast/")
 
-print(script_name + " : " + "Parsing scan results using Beautiful Soup")
-page_soup = BeautifulSoup(page_source, "html.parser")
+    driver.find_element_by_id("urltotest").clear()
+    driver.find_element_by_id("urltotest").send_keys(globals.target_website)
+    driver.find_element_by_id("submitbuttontext").click()
 
-print(script_name + " : " + "Parsing Color Contrast problems")
-results = page_soup.find("table",{"id":"resultstable"})
-contrast_problems = results.tbody.find_all("tr")
+    print(script_name + " : " + "Scanning target website " + globals.target_website + " for Color Contrast issues")
 
-workbook = xlsxwriter.Workbook(globals.test_log)
-worksheet = workbook.add_worksheet("css_checker_errors")
-excel_row = 0
-worksheet.write(excel_row, 0, "background_color")
-worksheet.write(excel_row, 1, "text_color")
-worksheet.write(excel_row, 2, "content_text")
-worksheet.write(excel_row, 3, "current_ratio")
-worksheet.write(excel_row, 4, "fix_remarks")
+    time.sleep(globals.time_wait)
+    page_source = driver.page_source
+    # Close the webdriver
+    driver.close()
+    # Selenium hands over the page source to Beautiful Soup for WebScraping
 
-for problem in contrast_problems:
-     excel_row += 1
-     column_bgcolor = problem.find("div",{"class":"smalltext"})
-     column_content = problem.find("textarea")
-     column_textcolor = problem.td.findNext('td').find("div",{"class":"smalltext"})
-     column_remarks = problem.find("div",{"style":"margin-top:1rem;"})
-     column_ratio = problem.td.findNext('td').findNext('td').findNext('td').findNext('td').div.div.findNext("div").find("span", {"class": "inblock fright"})
-     worksheet.write(excel_row, 0, column_bgcolor.text)
-     worksheet.write(excel_row, 1, column_textcolor.text)
-     worksheet.write(excel_row, 2, column_content.text)
-     worksheet.write(excel_row, 3, column_ratio.text)
-     worksheet.write(excel_row, 4, column_remarks.text)
+    print(script_name + " : " + "Parsing scan results using Beautiful Soup")
+    page_soup = BeautifulSoup(page_source, "html.parser")
 
-print(script_name + " : " + "Color Contrast issue count " + str (excel_row) )
-workbook.close()
+    print(script_name + " : " + "Parsing Color Contrast problems")
+    results = page_soup.find("table", {"id": "resultstable"})
+    contrast_problems = results.tbody.find_all("tr")
 
-print(script_name + " : " + "All results written to file " + globals.test_log )
-print(script_name + " : " + "Finished in " + str ( (datetime.datetime.now() - globals.time_start ).total_seconds() ) +" seconds")
+    globals.test_log = "logs/test_log_contrast.xlsx"
+    workbook = xlsxwriter.Workbook(globals.test_log)
+    worksheet = workbook.add_worksheet("contrast_issues")
+    excel_row = 0
+    worksheet.write(excel_row, 0, "background_color")
+    worksheet.write(excel_row, 1, "text_color")
+    worksheet.write(excel_row, 2, "content_text")
+    worksheet.write(excel_row, 3, "current_ratio")
+    worksheet.write(excel_row, 4, "fix_remarks")
+
+    for problem in contrast_problems:
+        excel_row += 1
+        column_bgcolor = problem.find("div", {"class": "smalltext"})
+        column_content = problem.find("textarea")
+        column_textcolor = problem.td.findNext('td').find("div", {"class": "smalltext"})
+        column_remarks = problem.find("div", {"style": "margin-top:1rem;"})
+        column_ratio = problem.td.findNext('td').findNext('td').findNext('td').findNext('td').div.div.findNext(
+            "div").find(
+            "span", {"class": "inblock fright"})
+        worksheet.write(excel_row, 0, column_bgcolor.text)
+        worksheet.write(excel_row, 1, column_textcolor.text)
+        worksheet.write(excel_row, 2, column_content.text)
+        worksheet.write(excel_row, 3, column_ratio.text)
+        worksheet.write(excel_row, 4, column_remarks.text)
+
+    print(script_name + " : " + "Color Contrast issue count " + str(excel_row))
+    workbook.close()
+
+    print(script_name + " : " + "All results written to file " + globals.test_log)
+    print(script_name + " : " + "Finished in " + str(
+        (datetime.datetime.now() - globals.time_start).total_seconds()) + " seconds")
+
+
+if __name__ == '__main__':
+    execute()
