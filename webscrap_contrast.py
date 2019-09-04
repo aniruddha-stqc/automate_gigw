@@ -1,9 +1,9 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.firefox.options import Options
-import xlsxwriter
 import globals
 import time
+import xlsxwriter
 import datetime
 import os, sys
 
@@ -32,15 +32,31 @@ page_soup = BeautifulSoup(page_source, "html.parser")
 print(script_name + " : " + "Parsing Color Contrast problems")
 results = page_soup.find("table",{"id":"resultstable"})
 contrast_problems = results.tbody.find_all("tr")
+
+workbook = xlsxwriter.Workbook(globals.test_log)
+worksheet = workbook.add_worksheet("css_checker_errors")
+excel_row = 0
+worksheet.write(excel_row, 0, "background_color")
+worksheet.write(excel_row, 1, "text_color")
+worksheet.write(excel_row, 2, "content_text")
+worksheet.write(excel_row, 3, "current_ratio")
+worksheet.write(excel_row, 4, "fix_remarks")
+
 for problem in contrast_problems:
-     #print(problem.text)
+     excel_row += 1
      column_bgcolor = problem.find("div",{"class":"smalltext"})
      column_content = problem.find("textarea")
      column_textcolor = problem.td.findNext('td').find("div",{"class":"smalltext"})
      column_remarks = problem.find("div",{"style":"margin-top:1rem;"})
      column_ratio = problem.td.findNext('td').findNext('td').findNext('td').findNext('td').div.div.findNext("div").find("span", {"class": "inblock fright"})
-     print(column_bgcolor.text)
-     print(column_textcolor.text)
-     print(column_content.text)
-     print(column_remarks.text)
-     print(column_ratio.text)
+     worksheet.write(excel_row, 0, column_bgcolor.text)
+     worksheet.write(excel_row, 1, column_textcolor.text)
+     worksheet.write(excel_row, 2, column_content.text)
+     worksheet.write(excel_row, 3, column_ratio.text)
+     worksheet.write(excel_row, 4, column_remarks.text)
+
+print(script_name + " : " + "Color Contrast issue count " + str (excel_row) )
+workbook.close()
+
+print(script_name + " : " + "All results written to file " + globals.test_log )
+print(script_name + " : " + "Finished in " + str ( (datetime.datetime.now() - globals.time_start ).total_seconds() ) +" seconds")
