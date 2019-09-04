@@ -1,6 +1,5 @@
 import datetime
 import os
-import sys
 import time
 
 import xlsxwriter
@@ -9,6 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
 import globals
+
 
 def execute():
     script_name = os.path.basename(__file__)
@@ -71,8 +71,10 @@ def execute():
     workbook.close()
 
     print(script_name + " : " + "All results written to file " + globals.test_log)
-    print(script_name + " : " + "Finished in " + str(
-        (datetime.datetime.now() - globals.time_start).total_seconds()) + " seconds")
+
 
 if __name__ == '__main__':
-     execute()
+    script_name = os.path.basename(__file__)
+    execute()
+    print(script_name + " : " + "Finished in " + str(
+        (datetime.datetime.now() - globals.time_start).total_seconds()) + " seconds")

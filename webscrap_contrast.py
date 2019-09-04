@@ -1,6 +1,5 @@
 import datetime
 import os
-import sys
 import time
 
 import xlsxwriter
@@ -67,9 +66,10 @@ def execute():
     workbook.close()
 
     print(script_name + " : " + "All results written to file " + globals.test_log)
-    print(script_name + " : " + "Finished in " + str(
-        (datetime.datetime.now() - globals.time_start).total_seconds()) + " seconds")
 
 
 if __name__ == '__main__':
+    script_name = os.path.basename(__file__)
     execute()
+    print(script_name + " : " + "Finished in " + str(
+        (datetime.datetime.now() - globals.time_start).total_seconds()) + " seconds")
