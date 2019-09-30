@@ -58,7 +58,7 @@ def execute():
             "span", {"class": "inblock fright"})
         worksheet.write(excel_row, 0, column_bgcolor.text)
         worksheet.write(excel_row, 1, column_textcolor.text)
-        worksheet.write(excel_row, 2, column_content.text)
+        worksheet.write(excel_row, 2, column_content.text.strip())
         worksheet.write(excel_row, 3, column_ratio.text)
         worksheet.write(excel_row, 4, column_remarks.text)
 
