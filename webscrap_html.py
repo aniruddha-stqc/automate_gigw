@@ -20,9 +20,9 @@ def execute():
     # Access Tool site
     driver.get("https://validator.w3.org/nu/")
     # Provide URL to be tested
-    driver.find_element_by_id("doc").send_keys(globals.target_website)
+    driver.find_element("id", "doc").send_keys(globals.target_website)
     # Click Submit
-    driver.find_element_by_id("submit").click()
+    driver.find_element("id", "submit").click()
 
     print(script_name + " : " + "Scanning target website " + globals.target_website + " for HTML issues")
     time.sleep(globals.time_wait)

@@ -18,9 +18,9 @@ def execute():
     driver = webdriver.Firefox(options=options, executable_path=globals.gecko_path, service_log_path=os.devnull)
 
     driver.get("https://jigsaw.w3.org/css-validator/")
-    driver.find_element_by_id("uri").send_keys(globals.target_website)
-    driver.find_element_by_xpath(
-        "(.//*[normalize-space(text()) and normalize-space(.)='Vendor Extensions:'])[1]/following::span[1]").click()
+    driver.find_element("id", "uri").send_keys(globals.target_website)
+    driver.find_element("xpath", "(.//*[normalize-space(text()) and normalize-space(.)='Vendor Extensions:'])["
+                                 "1]/following::span[1]").click()
 
     print(script_name + " : " + "Scanning target website " + globals.target_website + " for CSS issues")
     time.sleep(globals.time_wait)

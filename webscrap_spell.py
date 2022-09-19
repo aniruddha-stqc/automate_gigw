@@ -18,9 +18,9 @@ def execute():
     driver = webdriver.Firefox(options=options, executable_path=globals.gecko_path, service_log_path=os.devnull)
 
     driver.get("https://www.w3.org/2002/01/spellchecker")
-    driver.find_element_by_name("uri").clear()
-    driver.find_element_by_name("uri").send_keys(globals.target_website)
-    driver.find_element_by_xpath(
+    driver.find_element("name","uri").clear()
+    driver.find_element("name","uri").send_keys(globals.target_website)
+    driver.find_element("xpath",
         "(.//*[normalize-space(text()) and normalize-space(.)='Presents possible corrections:'])[1]/following::input[1]").click()
 
     print(script_name + " : " + "Scanning target website " + globals.target_website + " for Spelling issues")

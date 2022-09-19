@@ -1,7 +1,7 @@
 import datetime
 import os
 import threading
-
+import xlsxwriter
 import globals
 import webscrap_contrast
 import webscrap_css

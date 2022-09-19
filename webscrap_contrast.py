@@ -18,9 +18,9 @@ def execute():
     driver = webdriver.Firefox(options=options, executable_path=globals.gecko_path, service_log_path=os.devnull)
     driver.get("https://color.a11y.com/Contrast/")
 
-    driver.find_element_by_id("urltotest").clear()
-    driver.find_element_by_id("urltotest").send_keys(globals.target_website)
-    driver.find_element_by_id("submitbuttontext").click()
+    driver.find_element("id", "urltotest").clear()
+    driver.find_element("id", "urltotest").send_keys(globals.target_website)
+    driver.find_element("id", "submitbuttontext").click()
 
     print(script_name + " : " + "Scanning target website " + globals.target_website + " for Color Contrast issues")
 
