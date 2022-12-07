@@ -58,6 +58,7 @@ def execute():
 
 if __name__ == '__main__':
     script_name = os.path.basename(__file__)
+
     execute()
     print(script_name + " : " + "Finished in " + str(
         (datetime.datetime.now() - globals.time_start).total_seconds()) + " seconds")

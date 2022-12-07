@@ -5,3 +5,9 @@ Python based Web Scraping utility to gather information from websites and docume
 How to run?
 Input the URL of the site to be run in globals.py
 Run each file individually
+
+To crawl the site use "gospider" Kali Linux utility
+
+example:
+
+gospider  -s "https://dahd.nic.in/" -o output -c 10 -d 3    
