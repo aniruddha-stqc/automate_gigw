@@ -1,4 +1,6 @@
 # importing the modules
+import os
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -21,4 +23,13 @@ def extract_title(url):
     # for x in meta_tag:
     # print(x.attrs['keywords'])
     # print('-----------------')
+
+if __name__ == '__main__':
+    #script_name = os.path.basename(__file__)
+    urls_file = open('crawler_output/url_list.txt', 'r')
+    urls_all = urls_file.readlines()
+    for url in urls_all:
+        print(url)
+        extract_title(url.strip())
+    urls_file.close()
 
