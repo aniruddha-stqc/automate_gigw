@@ -39,14 +39,12 @@ def execute():
     page_soup = BeautifulSoup(page_source, "html.parser")
     if re.search("Congratulations!", page_soup.text):
         print(script_name + " : " + "Congratulations! No issues found" )
-
+    if re.search("We had trouble getting content from web page URL", page_soup.text):
+        print(script_name + " : " + "We had trouble getting content from web page URL")
     else:
         print(script_name + " : " + "Parsing Color Contrast problems")
         results = page_soup.find("table", {"id": "resultstable"})
-        try:
-            contrast_problems = results.tbody.find_all("tr")
-        except:
-            pass
+        contrast_problems = results.tbody.find_all("tr")
 
         globals.test_log = "logs/test_log_contrast.xlsx"
         workbook = xlsxwriter.Workbook(globals.test_log)

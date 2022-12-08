@@ -3,7 +3,7 @@ import os
 import platform
 
 time_start = datetime.datetime.now()
-target_website = "https://libgen.rs/"
+target_website = "https://wcd.nic.in/"
 is_linux = "Linux" in platform.platform()
 if is_linux:
     gecko_path = "./geckodriver"
