@@ -8,3 +8,27 @@ WebDriver BiDi listening on ws://127.0.0.1:6432
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Spectra\\AppData\\Local\\Temp\\rust_mozprofileyYWhyS\\search.json.mozlz4", (void 0)))
 DevTools listening on ws://127.0.0.1:6432/devtools/browser/44ca5612-6050-4bbf-a1e6-daa9c8838d3a
 1670406306152	Marionette	INFO	Stopped listening on port 6446
+1670483800158	geckodriver	INFO	Listening on 127.0.0.1:51728
+1670483803156	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "51729" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Spectra\\AppData\\Local\\Temp\\rust_mozprofile7bBbKk"
+*** You are running in headless mode.
+1670483803449	Marionette	INFO	Marionette enabled
+1670483803452	Marionette	INFO	Listening on port 51738
+Read port: 51738
+WebDriver BiDi listening on ws://127.0.0.1:51729
+1670483803578	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Spectra\\AppData\\Local\\Temp\\rust_mozprofile7bBbKk\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:51729/devtools/browser/89d0b8b0-cd91-4385-b18b-ca306e47202a
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://color.a11y.com."
+1670483839566	geckodriver	INFO	Listening on 127.0.0.1:51800
+1670483842566	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "51801" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Spectra\\AppData\\Local\\Temp\\rust_mozprofilewnarTu"
+*** You are running in headless mode.
+1670483842864	Marionette	INFO	Marionette enabled
+1670483842867	Marionette	INFO	Listening on port 51810
+Read port: 51810
+WebDriver BiDi listening on ws://127.0.0.1:51801
+1670483843225	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Spectra\\AppData\\Local\\Temp\\rust_mozprofilewnarTu\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:51801/devtools/browser/d22932e8-722e-438f-bf6f-1e6778e1bed7
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://color.a11y.com."

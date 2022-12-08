@@ -1,13 +1,13 @@
 import datetime
 import os
-
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from bs4 import BeautifulSoup
-
+import time
 import globals
 
 
 def execute():
-    """
     script_name = os.path.basename(__file__)
     print(script_name + " : " + "Launching Link Checker in Selenium Gecko Browser headlessly")
     options = Options()
@@ -15,14 +15,16 @@ def execute():
     driver = webdriver.Firefox(options=options, executable_path=globals.gecko_path, service_log_path=os.devnull)
 
     driver.get("https://validator.w3.org/checklink?uri=")
-    driver.find_element_by_id("uri_1").send_keys(globals.target_website)
-    driver.find_element_by_name("check").click()
-"""
+    time.sleep(30)
+    driver.find_element("id","uri_1").send_keys(globals.target_website)
+    driver.find_element("name","check").click()
+
     print(script_name + " : " + "Scanning target website " + globals.target_website + " for Broken Links")
-    # time.sleep(globals.time_wait)
-    # page_source = driver.page_source
+    #time.sleep(globals.time_wait)
+    time.sleep(300)
+    page_source = driver.page_source
     # Close the webdriver
-    # driver.close()
+    driver.close()
     # Selenium hands over the page source to Beautiful Soup for WebScraping
     print(script_name + " : " + "Parsing scan results using Beautiful Soup")
     page_soup = BeautifulSoup(open("logs/broken/links.html"), "html.parser")

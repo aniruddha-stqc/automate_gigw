@@ -64,6 +64,6 @@ def execute(website_url):
 if __name__ == '__main__':
     script_name = os.path.basename(__file__)
 
-    execute('https://dahd.nic.in/about-us/list-attachedsubordinate-offices-department' )
+    execute(globals.target_website )
     print(script_name + " : " + "Finished in " + str(
         (datetime.datetime.now() - globals.time_start).total_seconds()) + " seconds")
