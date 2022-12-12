@@ -15,6 +15,8 @@ def execute():
     print(script_name + " : " + "Launching Nu Html Checker in Selenium Gecko Browser headlessly")
     options = Options()
     options.headless = True
+    #options.add_argument("--enable-javascript")
+
     # Invoke Firefox
     driver = webdriver.Firefox(options=options, executable_path=globals.gecko_path, service_log_path=os.devnull)
     # Access Tool site

@@ -41,7 +41,7 @@ def execute():
         print(script_name + " : " + "Congratulations! No issues found" )
     if re.search("We had trouble getting content from web page URL", page_soup.text):
         print(script_name + " : " + "We had trouble getting content from web page URL")
-    else:
+    if re.search("Problems Detected!", page_soup.text):
         print(script_name + " : " + "Parsing Color Contrast problems")
         results = page_soup.find("table", {"id": "resultstable"})
         contrast_problems = results.tbody.find_all("tr")
