@@ -29,8 +29,11 @@ for tbody_single_row in tbody:
     except:
         pass
     tr_index = 0
+    print(tr[0].text)
+    print(tbody[row-1].find("tr").text)
     for tr_single_row in tr:
         print("--------------------------------------------------------------------")
+
         tr_index = tr_index + 1
         try:
 
